@@ -42,3 +42,17 @@ services:
         - JAVA_URL=${JAVA_URL}
     depends_on:
       - centos
+
+  maven:
+    image: fssai/maven:${MAVEN_VER}
+    build:
+      context: ./maven
+      dockerfile: ${TYPE}.Dockerfile
+      args:
+        - JAVA_VER=${JAVA_VER}
+        - MAVEN_VER=${JAVA_VER}
+        - MAVEN_URL=${MAVEN_URL}
+        - MAVEN_SHA=${MAVEN_SHA}
+    depends_on:
+      - centos
+      - java

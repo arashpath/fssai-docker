@@ -7,4 +7,4 @@ email_tester/docker-compose.yml
 *.rpm
 
 # Passwords
-app/.env
+foscos/.env

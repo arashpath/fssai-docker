@@ -11,11 +11,12 @@ case "$1" in
     ;;
   
   java8) # Oracle Java -------------------------------------------------------#
-    java8page="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html"
+    java8page="https://www.oracle.com/technetwork/java/javase/downloads\
+/jdk8-downloads-2133151.html"
     java8URL=$(curl -s $java8page | awk "
       /downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /.rpm/
       " | grep -o 'http.*\.rpm' | head -1)
-    curl -L -C - -b "oraclelicense=accept-securebackup-cookie" ${JAVA_URL} \
+    curl -L -C - -b "oraclelicense=accept-securebackup-cookie" ${java8URL} \
       -o $dir/packages/${java8URL##*/}
     ;;
 
