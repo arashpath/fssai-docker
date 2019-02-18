@@ -24,7 +24,7 @@
         - [x] [MAVEN](https://hub.docker.com/r/fssai/maven)
       - [ ] PostgreSQL
 - [ ] Create `Dockerfile` and `docker-compose.yml` for all services
-  - [x] [Web - Dockerfile Build in nodeJS and deploy in Nginx](./apps/web)
+  - [x] [Web - Dockerfile Build in nodeJS and deploy in Nginx](./app/web/Dockerfile)
   - [ ] Spring Cloud Services
   - [ ] PostgreSQL DB Cluster  
 - [ ] Create Private Docker Registry
