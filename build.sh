@@ -8,8 +8,8 @@
 
 if [ -d $1 ] ; then
   if [[ -d $1/$2 && $2!="all" ]] ; then
-    docker-compose -f $1/docker-compose.yml build -d $2
-  elif
-    docker-compose -f $1/docker-compose.yml build
+    cd $1; docker-compose build -d $2
+  else
+    cd $1; docker-compose build
   fi
 fi 
