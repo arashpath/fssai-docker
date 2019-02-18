@@ -51,7 +51,6 @@ services:
       args:
         - JAVA_VER=${JAVA_VER}
         - MAVEN_VER=${MAVEN_VER}
-        - MAVEN_URL=${MAVEN_URL}
         - MAVEN_SHA=${MAVEN_SHA}
     depends_on:
       - centos
