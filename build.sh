@@ -8,7 +8,7 @@
 
 if [ -d $1 ] ; then
   if [[ -d $1/$2 && $2!="all" ]] ; then
-    cd $1; docker-compose build -d $2
+    cd $1; docker-compose build $2
   else
     cd $1; docker-compose build
   fi
