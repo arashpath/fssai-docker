@@ -1,0 +1,75 @@
+version: "2"
+services:
+
+# Base Images --------------------------------------------------------------- #
+  os:
+    image: ${REGISTRY}/${OS}:${OS_VER}
+    build:
+      context: ./os
+      dockerfile: ${OS}.Dockerfile 
+      args:
+        - OS_VER=${OS_VER}
+  os_tag:
+    extends: os
+    image: ${REGISTRY}/${OS}
+
+  nginx:
+    image: ${REGISTRY}/nginx:${NGINX_VER}
+    build:
+      context: ./nginx
+      dockerfile: ${OS}.Dockerfile
+      args:
+        - OS_VER=${OS_VER}
+        - NGINX_VER=${NGINX_VER}
+  nginx_tag:
+    extends: nginx
+    image: ${REGISTRY}/nginx
+
+  
+  svn:
+    image: ${REGISTRY}/svn
+    build: 
+      context: ./svn
+      dockerfile: ${OS}.Dockerfile
+      args: 
+        - OS_VER=${OS_VER}
+
+  node:
+    image: ${REGISTRY}/node:${NODE_VER}
+    build: 
+      context: ./node
+      dockerfile: ${OS}.Dockerfile
+      args:
+        - OS_VER=${OS_VER} 
+        - NODE_VER=${NODE_VER}
+  node_tag:
+    extends: node
+    image: ${REGISTRY}/node 
+
+  java:
+    image: ${REGISTRY}/java:${JAVA_VER}
+    build:
+      context: ./java
+      dockerfile: ${OS}.Dockerfile
+      args:
+        - OS_VER=${OS_VER}
+        - JAVA_VER=${JAVA_VER}
+        - JAVA_URL=${JAVA_URL}
+  java_tag:
+    extends: java
+    image: ${REGISTRY}/java
+
+  maven:
+    image: ${REGISTRY}/maven:${MAVEN_VER}
+    build:
+      context: ./maven
+      dockerfile: ${OS}.Dockerfile
+      args:
+        - JAVA_VER=${JAVA_VER}
+        - MAVEN_VER=${MAVEN_VER}
+        - MAVEN_SHA=${MAVEN_SHA}
+  maven_tag:
+    extends: maven
+    image: ${REGISTRY}/maven
+
+
