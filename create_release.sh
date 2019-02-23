@@ -23,15 +23,21 @@ images_build() { # ----------- Images for building from sourcecode in Staging #
 }
 
 get_source() { # ------------------------------ Checkout latest code from SVN #
-  docker run --rm -v $dir/build/sourcecode:/sourcecode \
-    fssai/svn bash /sourcecode/get_source.sh $1   
+  echo "SVN Checkout $1 Source Code..."
+  docker run --rm -v $dir/build:/build \
+    fssai/svn bash /build/get_source.sh $1   
+}
+
+build_web() { # ---------------------------------- Build Frontend from Source #
+  get_source "Frontend" 
+  echo "Building Frontend..."
+  cd $dir/build/; docker-compose up -d --build 
 }
 
 main () {
-  images_base # Build all base images and export in tar File ---------| STEP 01
-  images_build # Build required images for building from source code -| STEP 02
-  get_source "Frontend" # Checkout latest frontend source code -------| STEP 03
-
+  images_base # Create base images and export in tar File ------------| STEP 01
+  images_build # Create images for building source code --------------| STEP 02
+  build_web # Build Frontend from latest svn source code -------------| STEP 03
 }
 
 main

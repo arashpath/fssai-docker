@@ -3,15 +3,10 @@ services:
 
   web:
     build:
-      context: ./frontend
+      context: ./Frontend
       dockerfile: ${OS}.Dockerfile
-      target: ${TARGET}
-      args:
-      # SVN Credentials  
-        - "SVN_URL=${SVN_URL}"
-        - "SVN_USER=${SVN_USER}"
-        - "SVN_PASS=${SVN_PASS}"
-    image: ${REGISTRY}/web:${TARGET}
+      #      target: ${TARGET}
+    image: ${REGISTRY}/web:devel #${TARGET}
     volumes:
-      - ../deploy/web:/web
+      - ../deploy/web:/deploy/web
       
