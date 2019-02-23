@@ -5,7 +5,7 @@ dir="$(dirname $(readlink -f $0))"
 #release="$(date +%y%m%d%H%M)"
 #echo $release
 
-base_images() { # ------------ Base Images to deploy containers in Production #
+images_base() { # ----------------- Images to deploy containers in Production #
   echo "Creating Base Images..."
   cd $dir/images/; docker-compose build
   echo "Base Images Created"
@@ -15,18 +15,23 @@ base_images() { # ------------ Base Images to deploy containers in Production #
   )
 }
 
-build_images() { # ------ Build Images for building sourcecode in Development # 
+images_build() { # ----------- Images for building from sourcecode in Staging # 
   echo "Creating Build Images..."
-  cd $dir/images/; docker-compose -f build.dokcer-compose.yml build
+  cd $dir/images/; docker-compose -f build.docker-compose.yml build
   echo "Build Images Created"
   docker image ls --filter label="fssai.type=build"
 }
 
-#base_images
-#build_images
+get_source() { # ------------------------------ Checkout latest code from SVN #
+  docker run --rm -v $dir/build/sourcecode:/sourcecode \
+    fssai/svn bash /sourcecode/get_source.sh $1   
+}
+
 main () {
-  base_images # Build all base images and export in tar File ---------| STEP 01
-  build_images # Build required images for building from source code -| STEP 02
+  images_base # Build all base images and export in tar File ---------| STEP 01
+  images_build # Build required images for building from source code -| STEP 02
+  get_source "Frontend" # Checkout latest frontend source code -------| STEP 03
+
 }
 
 main
