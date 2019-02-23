@@ -25,27 +25,6 @@ services:
     extends: nginx
     image: ${REGISTRY}/nginx
 
-  
-  svn:
-    image: ${REGISTRY}/svn
-    build: 
-      context: ./svn
-      dockerfile: ${OS}.Dockerfile
-      args: 
-        - OS_VER=${OS_VER}
-
-  node:
-    image: ${REGISTRY}/node:${NODE_VER}
-    build: 
-      context: ./node
-      dockerfile: ${OS}.Dockerfile
-      args:
-        - OS_VER=${OS_VER} 
-        - NODE_VER=${NODE_VER}
-  node_tag:
-    extends: node
-    image: ${REGISTRY}/node 
-
   java:
     image: ${REGISTRY}/java:${JAVA_VER}
     build:
@@ -58,18 +37,3 @@ services:
   java_tag:
     extends: java
     image: ${REGISTRY}/java
-
-  maven:
-    image: ${REGISTRY}/maven:${MAVEN_VER}
-    build:
-      context: ./maven
-      dockerfile: ${OS}.Dockerfile
-      args:
-        - JAVA_VER=${JAVA_VER}
-        - MAVEN_VER=${MAVEN_VER}
-        - MAVEN_SHA=${MAVEN_SHA}
-  maven_tag:
-    extends: maven
-    image: ${REGISTRY}/maven
-
-
