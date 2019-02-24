@@ -1,4 +1,4 @@
-version: "3"
+version: "3.5"
 services: 
 
   web:
@@ -8,3 +8,147 @@ services:
     volumes: 
       - ./web/dist:/usr/share/nginx/html:ro
       - ./web/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - web
+
+  service_registry:
+    image: fssai/java
+    ports:
+      - "8761:8761"
+    environment: 
+      - JAR_FILE=foscos_service_registry.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks:
+      app:
+        aliases:
+          - foscosapp01
+          - eureka01
+
+  gateway:
+    image: fssai/java
+    ports:
+      - "8762:8762"
+    environment: 
+      - JAR_FILE=foscos_gateway.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks:
+      - web
+      - app 
+
+  security:
+    image: fssai/java
+    ports:
+      - "9100:9100"
+    environment: 
+      - JAR_FILE=foscos_security.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    network_mode: host
+
+  config_service:
+    image: fssai/java
+    ports:
+      - "9300:9300"
+    environment: 
+      - JAR_FILE=foscos_config_service.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    network_mode: host
+
+  communication:
+    image: fssai/java
+    ports:
+      - "4200:4200"
+    environment: 
+      - JAR_FILE=foscos_communication.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    network_mode: host
+
+  dms:
+    image: fssai/java
+    ports:
+      - "4600:4600"
+    environment: 
+      - JAR_FILE=foscos_dms.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    network_mode: host
+
+  state_admin:
+    image: fssai/java
+    ports:
+      - "4700:4700"
+    environment: 
+      - JAR_FILE=foscos_state_admin.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    network_mode: host
+
+  common:
+    image: fssai/java
+    ports:
+      - "4100:4100"
+    environment: 
+      - JAR_FILE=foscos_common.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    network_mode: host
+
+  common_auth:
+    image: fssai/java
+    ports:
+      - "4300:4300"
+    environment: 
+      - JAR_FILE=foscos_common_auth.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    network_mode: host
+
+  fbo:
+    image: fssai/java
+    ports:
+      - "4400:4400"
+    environment: 
+      - JAR_FILE=foscos_fbo.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    network_mode: host
+
+  do:
+    image: fssai/java
+    ports:
+      - "4500:4500"
+    environment: 
+      - JAR_FILE=foscos_do.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    network_mode: host
+
+  inspection:
+    image: fssai/java
+    ports:
+      - "4800:4800"
+    environment: 
+      - JAR_FILE=foscos_inspection.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    network_mode: host
+
+networks:
+  web:
+  app:

@@ -1,3 +1,8 @@
 # Ignoring Source Codes
-build/sourcecode/*
-!build/sourcecode/get_source.sh
+
+build/Frontend/*
+build/all foscos jar/*
+!build/Frontend/*.Dockerfile
+!build/Frontend/.dockerignore
+deploy/web/dist/*
+deploy/base_images.tar

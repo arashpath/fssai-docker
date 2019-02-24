@@ -34,10 +34,17 @@ build_web() { # ---------------------------------- Build Frontend from Source #
   cd $dir/build/; docker-compose up -d --build 
 }
 
+run_jar() {
+  get_source "Backend/all%20foscos%20jar/"
+  cd $dir/deploy/: docker-compose up -d
+}
+
 main () {
   images_base # Create base images and export in tar File ------------| STEP 01
   images_build # Create images for building source code --------------| STEP 02
   build_web # Build Frontend from latest svn source code -------------| STEP 03
+  #buld_app
+  run_jar
 }
 
 main
