@@ -36,7 +36,7 @@ build_web() { # ---------------------------------- Build Frontend from Source #
 
 run_jar() {
   get_source "Backend/all%20foscos%20jar/"
-  cd $dir/deploy/: docker-compose up -d
+  cd $dir/deploy/; docker-compose up -d
 }
 
 main () {

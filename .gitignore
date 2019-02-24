@@ -1,8 +1,11 @@
+# Ignoring Passwords
+build/.svn_pass
 # Ignoring Source Codes
-
 build/Frontend/*
 build/all foscos jar/*
+# But Don't Ignore my Dockerfile
 !build/Frontend/*.Dockerfile
 !build/Frontend/.dockerignore
+# Ignore final Builds
 deploy/web/dist/*
 deploy/base_images.tar
