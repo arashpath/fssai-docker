@@ -14,7 +14,6 @@ services:
   service_registry:
     image: fssai/java
     ports:
-      - "8761:8761"
     environment: 
       - JAR_FILE=foscos_service_registry.jar
     volumes: 
@@ -23,13 +22,10 @@ services:
     networks:
       app:
         aliases:
-          - foscosapp01
-          - eureka01
+          - $eureka
 
   gateway:
     image: fssai/java
-    ports:
-      - "8762:8762"
     environment: 
       - JAR_FILE=foscos_gateway.jar
     volumes: 
@@ -41,25 +37,27 @@ services:
 
   security:
     image: fssai/java
-    ports:
-      - "9100:9100"
     environment: 
       - JAR_FILE=foscos_security.jar
     volumes: 
       - ./app/jars:/services:ro
       - /tmp:/tmp
-    network_mode: host
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
 
   config_service:
     image: fssai/java
-    ports:
-      - "9300:9300"
     environment: 
       - JAR_FILE=foscos_config_service.jar
     volumes: 
       - ./app/jars:/services:ro
       - /tmp:/tmp
-    network_mode: host
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
 
   communication:
     image: fssai/java
@@ -70,18 +68,22 @@ services:
     volumes: 
       - ./app/jars:/services:ro
       - /tmp:/tmp
-    network_mode: host
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
 
   dms:
     image: fssai/java
-    ports:
-      - "4600:4600"
     environment: 
       - JAR_FILE=foscos_dms.jar
     volumes: 
       - ./app/jars:/services:ro
       - /tmp:/tmp
-    network_mode: host
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
 
   state_admin:
     image: fssai/java
@@ -92,7 +94,10 @@ services:
     volumes: 
       - ./app/jars:/services:ro
       - /tmp:/tmp
-    network_mode: host
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
 
   common:
     image: fssai/java
@@ -103,51 +108,58 @@ services:
     volumes: 
       - ./app/jars:/services:ro
       - /tmp:/tmp
-    network_mode: host
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
 
   common_auth:
     image: fssai/java
-    ports:
-      - "4300:4300"
     environment: 
       - JAR_FILE=foscos_common_auth.jar
     volumes: 
       - ./app/jars:/services:ro
       - /tmp:/tmp
-    network_mode: host
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
 
   fbo:
     image: fssai/java
-    ports:
-      - "4400:4400"
     environment: 
       - JAR_FILE=foscos_fbo.jar
     volumes: 
       - ./app/jars:/services:ro
       - /tmp:/tmp
-    network_mode: host
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
 
   do:
     image: fssai/java
-    ports:
-      - "4500:4500"
     environment: 
       - JAR_FILE=foscos_do.jar
     volumes: 
       - ./app/jars:/services:ro
       - /tmp:/tmp
-    network_mode: host
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
 
   inspection:
     image: fssai/java
-    ports:
-      - "4800:4800"
     environment: 
       - JAR_FILE=foscos_inspection.jar
     volumes: 
       - ./app/jars:/services:ro
       - /tmp:/tmp
-    network_mode: host
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
 
 networks:
   web:
