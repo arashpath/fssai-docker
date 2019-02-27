@@ -13,7 +13,6 @@ services:
 
   service_registry:
     image: fssai/java
-    ports:
     environment: 
       - JAR_FILE=foscos_service_registry.jar
     volumes: 
@@ -61,8 +60,6 @@ services:
 
   communication:
     image: fssai/java
-    ports:
-      - "4200:4200"
     environment: 
       - JAR_FILE=foscos_communication.jar
     volumes: 
@@ -87,8 +84,6 @@ services:
 
   state_admin:
     image: fssai/java
-    ports:
-      - "4700:4700"
     environment: 
       - JAR_FILE=foscos_state_admin.jar
     volumes: 
@@ -101,8 +96,6 @@ services:
 
   common:
     image: fssai/java
-    ports:
-      - "4100:4100"
     environment: 
       - JAR_FILE=foscos_common.jar
     volumes: 
