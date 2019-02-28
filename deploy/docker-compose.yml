@@ -1,0 +1,159 @@
+version: "3.5"
+services: 
+
+  web:
+    image: fssai/nginx
+    ports:
+      - "80:80"
+    volumes: 
+      - ./web/dist:/usr/share/nginx/html:ro
+      - ./web/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - web
+
+  service_registry:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_service_registry.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks:
+      app:
+        aliases:
+          - $eureka
+
+  gateway:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_gateway.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks:
+      - web
+      - app 
+
+  security:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_security.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
+
+  config_service:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_config_service.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
+
+  communication:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_communication.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
+
+  dms:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_dms.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
+
+  state_admin:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_state_admin.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
+
+  common:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_common.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
+
+  common_auth:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_common_auth.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
+
+  fbo:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_fbo.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
+
+  do:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_do.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
+
+  inspection:
+    image: fssai/java
+    environment: 
+      - JAR_FILE=foscos_inspection.jar
+    volumes: 
+      - ./app/jars:/services:ro
+      - /tmp:/tmp
+    networks: 
+      - app
+    extra_hosts:
+      - "$db:$db_ip"
+
+networks:
+  web:
+  app:

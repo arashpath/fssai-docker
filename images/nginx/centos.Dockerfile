@@ -1,6 +1,6 @@
-ARG CENTOS_VER=7.5.1804
-FROM fssai/centos:${CENTOS_VER}
-
+ARG OS_VER=7.5.1804
+FROM fssai/centos:${OS_VER}
+LABEL fssai.type="base"
 ARG NGINX_VER=1.14.2
 RUN echo "[nginx-stable]"                                                    > /etc/yum.repos.d/nginx.repo  \
  && echo "name=nginx stable repo"                                            >> /etc/yum.repos.d/nginx.repo \

@@ -1,0 +1,12 @@
+version: "3.4"
+services:
+
+  web:
+    build:
+      context: ./Frontend
+      dockerfile: ${OS}.Dockerfile
+      #      target: ${TARGET}
+    image: ${REGISTRY}/web:devel #${TARGET}
+    volumes:
+      - ../deploy/web:/deploy/web
+      

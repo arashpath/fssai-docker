@@ -1,13 +1,13 @@
 ## Install Docker
 ```bash
-yum remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
-                  docker-engine
+yum remove docker \ 
+           docker-client \
+           docker-client-latest \
+           docker-common \
+           docker-latest \
+           docker-latest-logrotate \
+           docker-logrotate \
+           docker-engine
 
 yum install -y yum-utils \
   device-mapper-persistent-data \
@@ -20,6 +20,24 @@ yum install -y docker-ce --downloadonly
 tar /var/cache/yum/x86_64/7
 ```
 
+# Application Deployment
+
+1. Install Docker
+2. Clone Deployment Scripts
+   ```bash
+   git clone https://github.com/arashpath/fssai-docker.git
+   cd fssai-docker/ ; git checkout deploy
+   ``` 
+3. Create SVN Password File at `build/.svn_pass`
+   ```bash
+   svn_url=
+   svn_user=
+   svn_pass=
+   ```
+4. Run Script
+   ```bash
+   ./create_release.sh
+   ```
 
 ## Shipping Images
    ```bash
