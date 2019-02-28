@@ -8,9 +8,9 @@ RUN npm set progress=false \
  && npm install
 # Building frontend
 COPY . .
-RUN $(npm bin)/ng build --prod
+RUN rm -rf dist && $(npm bin)/ng build --prod
 EXPOSE 1000
 VOLUME /deploy
 # Copy Build files to deploy and run container.
-CMD cp -av dist /deploy/web/ \
+CMD rm -rf /deploy/web/dist && cp -av dist /deploy/web/ \
  && ./node_modules/.bin/ng serve --port 1000 --host 0.0.0.0
