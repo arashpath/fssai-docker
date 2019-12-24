@@ -1,9 +1,9 @@
 ARG JAVA_VER=8u201
 FROM fssai/java:${JAVA_VER}
 
-ARG MAVEN_VER=3.6.0
+ARG MAVEN_VER=3.6.3
 ARG USER_HOME_DIR="/root"
-ARG MAVEN_SHA=fae9c12b570c3ba18116a4e26ea524b29f7279c17cbaadc3326ca72927368924d9131d11b9e851b8dc9162228b6fdea955446be41207a5cfc61283dd8a561d2f
+ARG MAVEN_SHA=c35a1803a6e70a126e80b2b3ae33eed961f83ed74d18fcd16909b2d44d7dada3203f1ffe726c17ef8dcca2dcaa9fca676987befeadc9b9f759967a8cb77181c0
 ARG MAVEN_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VER}/binaries
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
