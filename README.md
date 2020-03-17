@@ -5,7 +5,7 @@
 
 | Images | Version |
 |-------|--------:|
-|[![CentOS](https://img.shields.io/docker/pulls/fssai/centos.svg?link=https://hub.docker.com/r/fssai/centos&colorB=green&label=CentOS&logoColor=brightgreen&style=popout-square&logo=linux)](https://hub.docker.com/r/fssai/centos) | 7.5.1804 |
+|[![CentOS](https://img.shields.io/docker/pulls/fssai/centos.svg?link=https://hub.docker.com/r/fssai/centos&colorB=green&label=CentOS&logoColor=brightgreen&style=popout-square&logo=linux)](https://hub.docker.com/r/fssai/centos) | 7.7.1908 |
 |[![Nginx](https://img.shields.io/docker/pulls/fssai/nginx.svg?colorB=green&label=Nginx&logoColor=brightgreen&style=popout-square&logo=nginx)](https://hub.docker.com/r/fssai/nginx) | 1.14.2 |
 |[![Node.js](https://img.shields.io/docker/pulls/fssai/node.svg?colorB=green&label=Node.js&logoColor=brightgreen&style=popout-square&logo=Node.js)](https://hub.docker.com/r/fssai/node) | 10.15.1 |
 |[![Oracle Java SE](https://img.shields.io/docker/pulls/fssai/java.svg?colorB=green&label=Java&logoColor=brightgreen&style=popout-square&logo=java)](https://hub.docker.com/r/fssai/java) | 8u201 |
